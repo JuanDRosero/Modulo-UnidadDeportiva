@@ -2,7 +2,10 @@
 {
     public class AsistenciaMiembroModel
     {
-        public int ID { get; set; }
+        #region PropiedadesBusqueda
+        public int Codigo { get; set; }
+        public int EquipoID { get; set; }
+        #endregion
         /*
          * 
          * Hace falta revisar los parametros que van aca
