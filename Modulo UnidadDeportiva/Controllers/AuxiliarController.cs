@@ -19,12 +19,22 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
         [Route("/Docente")]
         [HttpGet]
         public IActionResult AsistenciaDocente(AsistenciaDocenteModel model)
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (model.NombreDocente!=null && model.ApellidoDocente!=null)
             {
                 //Aca se llena model con los datos solicitados
@@ -35,6 +45,11 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaPasante(AsistenciaPasanteModel model)
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (model.codEstudiante!=null)
             {
                 //Aca se llena model con los datos solicitados
@@ -45,6 +60,11 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaMiembro(AsistenciaMiembroModel model)
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (model.Codigo != null && model.EquipoID!= null)
             {
                 //Aca se llena model con los datos solicitados
@@ -61,6 +81,10 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpPost]
         public IActionResult PrestamoMaterial(object[] materiales)
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             /*
              * Acá va el codigo para prestar materiales
              * 
@@ -72,11 +96,20 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaPasante()
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
         public IActionResult AsistenciaDocentePost(AsistenciaDocenteModel model)
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -89,6 +122,11 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaMiembro()
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
     }

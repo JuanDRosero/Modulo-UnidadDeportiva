@@ -32,13 +32,25 @@ namespace Modulo_UnidadDeportiva.Controllers
             var usuario = _aut.IngresarAuxiliar(codigo);
             if (usuario == null)
                 usuario = _aut.IngresarDirector(codigo);
+            else
+                HttpContext.Session.SetInt32("_id", 1); //ID Sesion 1 Auxiliar
+
             if (usuario==null)
             {
                 return View();
             }
-            //  Revisar acá para que valide según el tipo de usuario a donde lo manda
-            //Ademas hay que Añadir el uso de la sesion
-            return RedirectToAction("Index", "Controlador");
+            HttpContext.Session.SetInt32("_id", 2); //ID Sesion 1 Director
+
+            switch (HttpContext.Session.GetInt32("_id"))
+            {
+                case 1:
+                    return RedirectToAction("Index", "Auxiliar");
+                case 2:
+                    return RedirectToAction("Index", "Director");
+                default:
+                    return View();
+                    
+            }
         }
 
 

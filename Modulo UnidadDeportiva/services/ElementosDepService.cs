@@ -5,6 +5,12 @@ namespace Modulo_UnidadDeportiva.services
 {
     public class ElementosDepService : IElementosDep
     {
+        private readonly string _connectionString;
+        public ElementosDepService(IConfiguration config)
+        {
+            _connectionString = config.GetConnectionString("OracleDBConnection");
+        }
+
         public List<IElementosDep> GetElementos(int SedeID, int DepID)
         {
             /* Se encarga de devolver los elementos Dep

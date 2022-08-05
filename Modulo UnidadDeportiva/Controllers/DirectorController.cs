@@ -13,6 +13,10 @@ namespace Modulo_UnidadDeportiva.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
