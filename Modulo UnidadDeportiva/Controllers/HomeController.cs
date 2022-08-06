@@ -23,7 +23,7 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult Index()    //Retorna la vista del form de loggeo
         {
-            //HttpContext.Session.SetInt32("_id", -1);//Inicia el ID en la sesion en-1
+            HttpContext.Session.SetInt32("_id", -1);//Inicia el ID en la sesion en-1
             return View();
         }
         [HttpPost]
