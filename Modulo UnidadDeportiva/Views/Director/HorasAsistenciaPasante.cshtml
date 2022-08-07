@@ -1,4 +1,5 @@
-﻿@*
+﻿@model IEnumerable<PasanteModel>
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -15,19 +16,24 @@
             <table class="table">
                 <thead align="center">
                     <tr>
-                        <th>Cod. Pasante</th>
-                        <th>Nombre del pasante</th>
-                        <th>Periodo</th>
-                        <th>Sede</th>
+                        <th>@Html.DisplayNameFor(x=>x.CodgoPasante)</th>
+                        <th>@Html.DisplayNameFor(x=>x.Nombre)</th>
+                        <th>@Html.DisplayNameFor(x=>x.Periodo)</th>
+                        <th>@Html.DisplayNameFor(x=>x.Sede)</th>
+                        <th>@Html.DisplayNameFor(x=>x.FechaHoraRegistro)</th>
                     </tr>
                 </thead>
                 <tbody align="center">
-                    <tr>
-                        <td>20201020010</td>
-                        <td>El Maxwell</td>
-                        <td>2021-1</td>
-                        <td>La 40</td>
-                    </tr>
+                   @foreach (var item in Model)
+                    {
+                         <tr>
+                            <td>@Html.DisplayFor(x=>item.CodgoPasante)</td>
+                            <td>@Html.DisplayFor(x=>item.Nombre)</td>
+                            <td>@Html.DisplayFor(x=>item.Periodo)</td>
+                            <td>@Html.DisplayFor(x=>item.Sede)</td>
+                            <td>@Html.DisplayFor(x=>item.FechaHoraRegistro)</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <button class="btn btn-primary">Generar pdf</button>

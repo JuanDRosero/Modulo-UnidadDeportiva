@@ -1,4 +1,5 @@
 ﻿using Modulo_UnidadDeportiva.Interfaces;
+using Modulo_UnidadDeportiva.Models;
 
 namespace Modulo_UnidadDeportiva.services
 {
@@ -17,6 +18,16 @@ namespace Modulo_UnidadDeportiva.services
         }
 
         public void GenerarReportePasantes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<EquipoModel> GetEquipos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PasanteModel> getPasantes()
         {
             throw new NotImplementedException();
         }

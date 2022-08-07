@@ -8,7 +8,6 @@ namespace Modulo_UnidadDeportiva.Controllers
     {
         private readonly IReportes _reportes;
         private readonly IAutenticacion _auth;
-        private Empleado _empleado;
         public DirectorController(IReportes reportes, IAutenticacion auth)
         {
             _reportes = reportes;
@@ -45,6 +44,7 @@ namespace Modulo_UnidadDeportiva.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            
             return View();
         }
     }
