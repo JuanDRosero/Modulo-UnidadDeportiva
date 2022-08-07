@@ -12,14 +12,12 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public AsistenciaPasanteModel GetAsistenciaPasante(DateTime fechaHora)
+        public AsistenciaPasanteModel GetAsistenciaPasante(int codigo)
         {
+
+            //3.2.2.1. y  3.2.2.1.
             throw new NotImplementedException();
         }
 
-        public Estudiante GetEstudiante(int codigo)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

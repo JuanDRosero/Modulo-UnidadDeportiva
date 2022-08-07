@@ -9,13 +9,16 @@ namespace Modulo_UnidadDeportiva.Controllers
         private readonly IDocente _docente;
         private readonly IPasante _pasante;
         private readonly IMiembroE _miembro;
+        private readonly IElementosDep _prestamo;
         private readonly IAutenticacion _auth;
 
-        public AuxiliarController(IDocente docente, IPasante pasante, IMiembroE miembro, IAutenticacion auth)
+        public AuxiliarController(IDocente docente, IPasante pasante, IMiembroE miembro, IAutenticacion auth,
+            IElementosDep prestamo)
         {
             _docente = docente;
             _pasante = pasante;
             _miembro = miembro;
+            _prestamo = prestamo;
             _auth = auth;
         }
         [HttpGet]
@@ -60,7 +63,7 @@ namespace Modulo_UnidadDeportiva.Controllers
 
             if (model.codEstudiante!=null)
             {
-                //Aca se llena model con los datos solicitados
+                model = _pasante.GetAsistenciaPasante((int)model.codEstudiante);
             }
             return View(model);
         }
@@ -76,29 +79,21 @@ namespace Modulo_UnidadDeportiva.Controllers
 
             if (model.Codigo != null && model.EquipoID!= null)
             {
-                //Aca se llena model con los datos solicitados
+                model = _miembro.GetAsistenciaMiembro(model.Codigo, model.EquipoID);
             }
             return View(model);
         }
 
-        /*
-         * Hace falta pensar como es lo de la asitencia o si necesita vita
-         * La vista anterior es necesaria?
-         * 
-         */
 
         [HttpPost]
-        public IActionResult PrestamoMaterial(List<int> materiales)
+        public IActionResult PrestamoMaterial(List<int> materiales, int codEmpleado)
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
-            /*
-             * Acá va el codigo para prestar materiales
-             * 
-             */
+            var correcto = _prestamo.Prestar(materiales, codEmpleado);
             return RedirectToAction("Index");
         }
 

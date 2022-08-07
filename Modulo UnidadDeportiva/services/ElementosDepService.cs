@@ -21,7 +21,7 @@ namespace Modulo_UnidadDeportiva.services
             throw new NotImplementedException();    
         }
 
-        public bool Prestar(List<Elemento> elementos, Empleado responsable)
+        public bool Prestar(List<Elemento> elementos, int responsableID)
         {
             /*
              * Esta interfaz se encargará de realizar el prestamo del material 
