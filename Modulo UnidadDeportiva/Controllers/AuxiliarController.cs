@@ -9,24 +9,25 @@ namespace Modulo_UnidadDeportiva.Controllers
         private readonly IDocente _docente;
         private readonly IPasante _pasante;
         private readonly IMiembroE _miembro;
-        private Empleado _empleado;
+        private readonly IAutenticacion _auth;
 
-        public AuxiliarController(IDocente docente, IPasante pasante, IMiembroE miembro)
+        public AuxiliarController(IDocente docente, IPasante pasante, IMiembroE miembro, IAutenticacion auth)
         {
             _docente = docente;
             _pasante = pasante;
             _miembro = miembro;
+            _auth = auth;
         }
         [HttpGet]
-        public IActionResult Index(Empleado? empleado)
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
-            _empleado = empleado;
-            return View(_empleado);
+            
+            return View(_auth.IngresarAuxiliar((int) HttpContext.Session.GetInt32("_id")));
         }
         [Route("/Docente")]
         [HttpGet]
