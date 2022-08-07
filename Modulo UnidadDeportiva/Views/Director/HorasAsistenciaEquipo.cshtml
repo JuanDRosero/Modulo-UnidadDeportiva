@@ -35,8 +35,13 @@
                 }
                 </tbody>
             </table>
-            <button class="btn btn-primary">Generar pdf</button>
+            <button class="btn btn-primary" id="btnPrint">Generar pdf</button>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    document.getElementById("btnPrint").onclick(function() {
+        window.print();
+    });
+</script>
 <!--  -->

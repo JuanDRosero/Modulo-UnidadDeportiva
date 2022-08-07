@@ -33,7 +33,8 @@ namespace Modulo_UnidadDeportiva.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            var listaP = _reportes.getPasantes();
+            return View(listaP);
         }
 
         [Route("/HorasEquipo")]
@@ -44,8 +45,8 @@ namespace Modulo_UnidadDeportiva.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
-            return View();
+            var listaE = _reportes.GetEquipos();
+            return View(listaE);
         }
     }
 }

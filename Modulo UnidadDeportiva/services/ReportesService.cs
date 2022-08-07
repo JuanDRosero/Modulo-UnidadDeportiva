@@ -12,16 +12,6 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public void GenerarReporteMiembros()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GenerarReportePasantes()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<EquipoModel> GetEquipos()
         {
             throw new NotImplementedException();
