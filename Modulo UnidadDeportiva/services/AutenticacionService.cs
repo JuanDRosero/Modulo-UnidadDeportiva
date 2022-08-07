@@ -31,7 +31,7 @@ namespace Modulo_UnidadDeportiva.services
                         var empleado = new Empleado();
                         while (reader.Read())
                         {
-                            empleado.Codigo = Convert.ToInt32(reader["codempleado"]);
+                            empleado.Codigo = reader["codempleado"].ToString();
                             empleado.NombreEmpleado = reader["nomempleado"].ToString();
                             empleado.ApellidoEmpleado = reader["apellempleado"].ToString();
                             empleado.Cargo = reader["cargo"].ToString();
@@ -66,7 +66,7 @@ namespace Modulo_UnidadDeportiva.services
                         var empleado = new Empleado();
                         while (reader.Read())
                         {
-                            empleado.Codigo = Convert.ToInt32(reader["codempleado"]);
+                            empleado.Codigo = reader["codempleado"].ToString();
                             empleado.NombreEmpleado = reader["nomempleado"].ToString();
                             empleado.ApellidoEmpleado = reader["apellempleado"].ToString();
                             empleado.Cargo = reader["cargo"].ToString();

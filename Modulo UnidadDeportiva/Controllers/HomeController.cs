@@ -43,7 +43,7 @@ namespace Modulo_UnidadDeportiva.Controllers
             {
                 return View();
             }
-            HttpContext.Session.SetInt32("_cod", usuario.Codigo);
+            HttpContext.Session.SetString("_cod", usuario.Codigo);
             HttpContext.Session.SetInt32("_id", 2); //ID Sesion 2 Director
             HttpContext.Session.SetString("Nombre", usuario.NombreEmpleado + " " + usuario.ApellidoEmpleado); //ID Sesion 1 Auxiliar
 

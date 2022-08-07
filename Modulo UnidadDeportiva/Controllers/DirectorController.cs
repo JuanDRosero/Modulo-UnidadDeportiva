@@ -22,7 +22,7 @@ namespace Modulo_UnidadDeportiva.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
-            return View(_auth.IngresarDirector((int)HttpContext.Session.GetInt32("_id")));
+            return View(_auth.IngresarDirector(HttpContext.Session.GetString("_cod")));
         }
 
         [Route("/HorasPasantes")]
