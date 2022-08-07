@@ -4,7 +4,8 @@
     {
         public string CodEspacio { get; set; }
         public string NomEspacio { get; set; }
-        public int? EspacioPertenece { get; set; }  //ID del padre
+        public int? EspacioPerteneceID { get; set; }  //ID del padre
+        public int? TipoEspacioID { get; set; }
 
     }
 }

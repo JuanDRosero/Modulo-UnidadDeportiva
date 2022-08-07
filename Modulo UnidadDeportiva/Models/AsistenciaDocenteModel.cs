@@ -1,4 +1,6 @@
-﻿namespace Modulo_UnidadDeportiva.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Modulo_UnidadDeportiva.Models
 {
     public class AsistenciaDocenteModel
     {
@@ -8,10 +10,15 @@
         public string? ApellidoDocente { get; set; }
         #endregion
 
-        public Empleado? empleado { get; set; }
-        public Curso Curso { get; set; }
+        public bool HasItems { get; set; } = false; //Si la busqueda arroja algo esto pasa a true sino es false
+
+        public string Curso { get; set; }
         public Espacio Espacio { get; set; }
-        public Deporte  Deporte { get; set; }
+        public Deporte Deporte { get; set; }
         public int numEstudiantes { get; set; }
+
+        public List<SelectListItem>? ElementosDisp { get; set; }
+        public List<int> ElementosAPrestar{ get; set; }
+
     }
 }
