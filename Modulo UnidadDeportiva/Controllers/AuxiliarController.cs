@@ -86,14 +86,14 @@ namespace Modulo_UnidadDeportiva.Controllers
 
 
         [HttpPost]
-        public IActionResult PrestamoMaterial(List<int> materiales, int codEmpleado)
+        public IActionResult PrestamoMaterial(List<string> materiales, int codEmpleado)
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
-            var correcto = _prestamo.Prestar(materiales, codEmpleado);
+            var correcto = _prestamo.Prestar(materiales.Select(x=>Convert.ToInt32(x)).ToList(), codEmpleado);
             return RedirectToAction("Index");
         }
 
@@ -127,7 +127,7 @@ namespace Modulo_UnidadDeportiva.Controllers
         }
         [Route("/Miembro")]
         [HttpGet]
-        public IActionResult AsistenciaMiembro()
+        public IActionResult AsistenciaMiembro()    //hace falta terminarlo
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)

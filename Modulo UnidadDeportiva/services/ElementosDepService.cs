@@ -11,7 +11,7 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public List<IElementosDep> GetElementos(int SedeID, int DepID)
+        public List<Elemento> GetElementos(int SedeID, int DepID, DateTime fechaHora)
         {
             /* Se encarga de devolver los elementos Dep
              * 
@@ -21,7 +21,7 @@ namespace Modulo_UnidadDeportiva.services
             throw new NotImplementedException();    
         }
 
-        public bool Prestar(List<Elemento> elementos, int responsableID)
+        public bool Prestar(List<int> elementos, int responsableID)
         {
             /*
              * Esta interfaz se encargará de realizar el prestamo del material 
