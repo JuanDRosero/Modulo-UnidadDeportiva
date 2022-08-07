@@ -33,13 +33,19 @@ namespace Modulo_UnidadDeportiva.Controllers
             if (usuario == null)
                 usuario = _aut.IngresarDirector(codigo);
             else
-                HttpContext.Session.SetInt32("_id", 1); //ID Sesion 1 Auxiliar
+            {
+                HttpContext.Session.SetInt32("_id", 1); //1 Aux
+            }
+                
+                
 
             if (usuario==null)
             {
                 return View();
             }
-            HttpContext.Session.SetInt32("_id", 2); //ID Sesion 1 Director
+            HttpContext.Session.SetInt32("_cod", usuario.Codigo);
+            HttpContext.Session.SetInt32("_id", 2); //ID Sesion 2 Director
+            HttpContext.Session.SetString("Nombre", usuario.NombreEmpleado + " " + usuario.ApellidoEmpleado); //ID Sesion 1 Auxiliar
 
             switch (HttpContext.Session.GetInt32("_id"))
             {

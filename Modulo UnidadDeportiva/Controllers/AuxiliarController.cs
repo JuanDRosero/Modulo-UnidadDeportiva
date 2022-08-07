@@ -9,6 +9,7 @@ namespace Modulo_UnidadDeportiva.Controllers
         private readonly IDocente _docente;
         private readonly IPasante _pasante;
         private readonly IMiembroE _miembro;
+        private Empleado _empleado;
 
         public AuxiliarController(IDocente docente, IPasante pasante, IMiembroE miembro)
         {
@@ -17,20 +18,22 @@ namespace Modulo_UnidadDeportiva.Controllers
             _miembro = miembro;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(Empleado? empleado)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
-
-            return View();
+            _empleado = empleado;
+            return View(_empleado);
         }
         [Route("/Docente")]
         [HttpGet]
         public IActionResult AsistenciaDocente(AsistenciaDocenteModel model)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -45,7 +48,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaPasante(AsistenciaPasanteModel model)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -60,7 +64,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaMiembro(AsistenciaMiembroModel model)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -81,7 +86,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpPost]
         public IActionResult PrestamoMaterial(object[] materiales)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -96,7 +102,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaPasante()
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -105,7 +112,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpPost]
         public IActionResult AsistenciaDocentePost(AsistenciaDocenteModel model)
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -122,7 +130,8 @@ namespace Modulo_UnidadDeportiva.Controllers
         [HttpGet]
         public IActionResult AsistenciaMiembro()
         {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
+                || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
