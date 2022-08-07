@@ -1,9 +1,13 @@
-﻿@{
+﻿@model Empleado
+@{
     ViewData["Title"] = "Director Page";
 }
 
 <!--Aca mismo hacemos que genere los reportes?-->
 <div class="text-center">
-    <h1 class="display-4">Index Director</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h2 class="display-4">@Html.DisplayFor(x=>Model.NombreEmpleado)</h2>
+    <h2 class="display-4">@Html.DisplayFor(x=>Model.ApellidoEmpleado)</h2>
+    <h2 class="display-4">@Html.DisplayFor(x=>Model.Cargo)</h2>
+    <h2 class="display-4">@Html.DisplayFor(x=>Model.Sede)</h2>
+    <h2 class="display-4">@Html.DisplayFor(x=>Model.FechaInicio)</h2>
 </div>
