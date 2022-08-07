@@ -4,6 +4,7 @@ namespace Modulo_UnidadDeportiva.Models
 {
     public class AsistenciaDocenteModel
     {
+        public int IDDocente { get; set; }
         #region AtributosDeBusqueda
         //Atributos utilizados para buscar
         public string? NombreDocente { get; set; }
@@ -18,7 +19,7 @@ namespace Modulo_UnidadDeportiva.Models
         public int numEstudiantes { get; set; }
 
         public List<SelectListItem>? ElementosDisp { get; set; }
-        public List<int> ElementosAPrestar{ get; set; }
+        public List<string>? ElementosAPrestar{ get; set; }
 
     }
 }

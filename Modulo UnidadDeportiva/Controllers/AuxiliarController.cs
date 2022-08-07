@@ -86,14 +86,14 @@ namespace Modulo_UnidadDeportiva.Controllers
 
 
         [HttpPost]
-        public IActionResult PrestamoMaterial(List<string> materiales, int codEmpleado)
+        public IActionResult PrestamoMaterial(int idDocente,List<string> materiales)
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)
             {
                 return RedirectToAction("Index", "Home");
             }
-            var correcto = _prestamo.Prestar(materiales.Select(x=>Convert.ToInt32(x)).ToList(), codEmpleado);
+            var correcto = _prestamo.Prestar(materiales.Select(x=>Convert.ToInt32(x)).ToList(), idDocente);
             return RedirectToAction("Index");
         }
 
