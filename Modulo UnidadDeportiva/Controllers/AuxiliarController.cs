@@ -97,45 +97,5 @@ namespace Modulo_UnidadDeportiva.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("/Pasante")]
-        [HttpGet]
-        public IActionResult AsistenciaPasante()
-        {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
-                || HttpContext.Session.GetInt32("_id") != 1)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            return View();
-        }
-        [HttpPost]
-        public IActionResult AsistenciaDocentePost(AsistenciaDocenteModel model)
-        {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
-                || HttpContext.Session.GetInt32("_id") != 1)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            //Aca busca
-            return View(model);
-        }
-        [Route("/Miembro")]
-        [HttpGet]
-        public IActionResult AsistenciaMiembro()    //hace falta terminarlo
-        {
-            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
-                || HttpContext.Session.GetInt32("_id") != 1)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
-        }
     }
 }

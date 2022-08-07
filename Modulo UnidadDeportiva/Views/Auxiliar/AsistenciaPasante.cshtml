@@ -16,21 +16,19 @@
                                 <h3 class="text-center font-weight-light my-4">Buscar estudiante</h3>
                             </div>
                             <div class="card-body">
-                                <form>
+                                <form asp-action="AsistenciaPasante" method="get">
                                     <div class="row mb-3">
                                         <div class="form-floating mb-3">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputCod" type="text" />
+                                                <input class="form-control" asp-for="codEstudiante" type="text" />
                                                 <label for="inputCod">Codigo</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mt-4 mb-0">
                                         <div class="d-grid">
-                                            <a class="btn btn-primary btn-block" href="#">
-                                                Buscar
-                                                estudiante
-                                            </a>
+                                            <button class="btn btn-primary btn-block" type="submit">Buscar
+                                                estudiante</button>
                                         </div>
                                     </div>
                                 </form>
@@ -41,83 +39,64 @@
             </div>
         </div>
         <!-- Datos que retorna la aplicacion -->
+        @if (Model.HastItems)
+        {
+            <div class="container-fluid px-4">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-body">  
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <input class="form-control" asp-for="nombrePractica" type="text" disabled/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" asp-for="Espacio.NomEspacio" type="text" disabled/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <input class="form-control" asp-for="Deporte.Nombre" type="text" disabled/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input class="form-control" asp-for="numEstudiantes" type="number" disabled/>
+                                            </div>
+                                        </div>
+                                        <form asp-action="PrestamoMaterial" method="post">
+                                            <div class="form-group row">
+                                            <div class="col-lg-12">
+                                                <input asp-for="codEstudiante" name="idDocente" hidden>
+                                                <label>Selecciona el(los) recurso(s) a prestar</label>
+                                                <select name="materiales" multiple class="selectpicker form-control"
+                                                        id="number-multiple" data-container="body"
+                                                        data-live-search="true" title="Select a number"
+                                                        data-hide-disabled="true" data-actions-box="true"
+                                                        data-virtual-scroll="false" asp-items="Model.ElementosDisp">
+                                                        <!--                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>-->
 
-        <div class="container-fluid px-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-7">
-                        <div class="card shadow-lg border-0 rounded-lg mt-5">
-                            <div class="card-body">
-                                <form>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="fecha" type="date" />
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="hora" type="time" />
+                                        <div class="mt-4 mb-0">
+                                            <div class="d-grid">
+                                                <button class="btn btn-primary btn-block" type="submit">Guardar</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="horaInicio" type="time" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="horaFin" type="time" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="curso" type="text" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="espacio" type="text" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="deporte" type="text" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input class="form-control" id="numEstudiantes" type="number" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-lg-12">
-                                            <label>Selecciona el(los) recurso(s) a prestar</label>
-                                            <select multiple class="selectpicker form-control"
-                                                    id="number-multiple" data-container="body"
-                                                    data-live-search="true" title="Select a number"
-                                                    data-hide-disabled="true" data-actions-box="true"
-                                                    data-virtual-scroll="false">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 mb-0">
-                                        <div class="d-grid">
-                                            <a class="btn btn-primary btn-block" href="#">
-                                                Añadir
-                                                recurso
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4 mb-0">
-                                        <div class="d-grid">
-                                            <a class="btn btn-primary btn-block"
-                                               href="#">
-                                                Guardar
-                                            </a>
-                                        </div>
-                                    </div>
-                                </form>
+                                        </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
+        else if(Model.codEstudiante!=null)
+        {
+            <h1 class="text-center text-danger"></h1>
+        }
     </main>
 </div>
 <!-- -->

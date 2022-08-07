@@ -3,7 +3,7 @@
     public class AsistenciaMiembroModel
     {
         #region PropiedadesBusqueda
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public int EquipoID { get; set; }
         #endregion
 
