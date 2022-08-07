@@ -27,7 +27,7 @@ namespace Modulo_UnidadDeportiva.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(int codigo)
+        public IActionResult Index(string codigo)
         {
             var usuario = _aut.IngresarAuxiliar(codigo);
             if (usuario == null)

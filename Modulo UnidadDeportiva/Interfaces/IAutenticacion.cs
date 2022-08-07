@@ -4,7 +4,7 @@ namespace Modulo_UnidadDeportiva.Interfaces
 {
     public interface IAutenticacion
     {
-        public Empleado IngresarAuxiliar(int codigo);
-        public Empleado IngresarDirector(int codigo);
+        public Empleado IngresarAuxiliar(string codigo);
+        public Empleado IngresarDirector(string codigo);
     }
 }

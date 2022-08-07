@@ -4,6 +4,6 @@ namespace Modulo_UnidadDeportiva.Interfaces
 {
     public interface IMiembroE
     {
-        public AsistenciaMiembroModel GetAsistenciaMiembro(int codigoEstudiante, int equipo);
+        public AsistenciaMiembroModel GetAsistenciaMiembro(string codigoEstudiante, int equipo);
     }
 }

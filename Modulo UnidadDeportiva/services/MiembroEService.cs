@@ -12,7 +12,7 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public AsistenciaMiembroModel GetAsistenciaMiembro(int codigoEstudiante, int equipo)
+        public AsistenciaMiembroModel GetAsistenciaMiembro(string codigoEstudiante, int equipo)
         {
             throw new NotImplementedException();
         }
