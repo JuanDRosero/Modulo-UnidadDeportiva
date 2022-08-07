@@ -1,4 +1,5 @@
-﻿@*
+﻿@model AsistenciaDocenteModel
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -8,4 +9,18 @@
 
     En esta vista se colocará el formulario que obtiene director para AsistenciaDocenteModel
 
+
+    Tiene que haber primero un formulario que solicite los datos de nombre y apellido y lo mande como get dentro de Asistencia VieMode
+
 -->
+<form method="get" asp-action="AsistenciaDocente">
+    <input  asp-for="NombreDocente"/>
+    <input asp-for="ApellidoDocente"/>
+    <button type="submit">Buscar</button>
+</form>
+
+@if(Model.HasItems){
+    //Aca se ponen los campos
+} else if(Model.NombreDocente!=null && Model.ApellidoDocente!=null){
+    <h1>La fecha/Hora no corresponde a ninguna programacion</h1>
+}

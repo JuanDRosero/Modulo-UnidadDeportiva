@@ -39,12 +39,15 @@ namespace Modulo_UnidadDeportiva.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (model.NombreDocente!=null && model.ApellidoDocente!=null)
+            if (model.NombreDocente!=null && model.ApellidoDocente!=null)   //Si los datos de busqueda no son nulos busca el docente y toma asistencia
             {
-                //Aca se llena model con los datos solicitados
+                model= _docente.GetAsistenciaDocente(model.NombreDocente, model.ApellidoDocente);  
+
             }
+            
             return View(model);
         }
+
         [Route("/Pasante")]
         [HttpGet]
         public IActionResult AsistenciaPasante(AsistenciaPasanteModel model)
@@ -85,7 +88,7 @@ namespace Modulo_UnidadDeportiva.Controllers
          */
 
         [HttpPost]
-        public IActionResult PrestamoMaterial(object[] materiales)
+        public IActionResult PrestamoMaterial(List<int> materiales)
         {
             if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1 
                 || HttpContext.Session.GetInt32("_id") != 1)

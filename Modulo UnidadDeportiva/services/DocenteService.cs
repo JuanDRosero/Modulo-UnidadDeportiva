@@ -11,14 +11,12 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public AsistenciaDocenteModel GetAsistenciaDocente(DateTime fechaHora)
+        public AsistenciaDocenteModel GetAsistenciaDocente(String nombre, string Apellido)
         {
+            //Aca tendria que ir una consulta que con el nombre y el apellido y por debajo la aplicacion
+            //obtiene los datos del docente y la fecha actual y  retorna los datos  AsistenciaViewModel
             throw new NotImplementedException();    //Se encarga de obtener lo del 3.2.1.2.
         }
 
-        public Empleado GetDocente(string Nombre, string Apellido)
-        {
-            throw new NotImplementedException();    //Se encarga de obtener lo del 3.2.1.1.
-        }
     }
 }
