@@ -20,9 +20,26 @@ namespace Modulo_UnidadDeportiva.Controllers
             return View();
         }
 
-        /*
-         * acá van los metodos de generar reportes
-         * 
-         */
+        [Route("/HorasPasantes")]
+        [HttpGet]
+        public IActionResult HorasPasante()  //Redireccionar
+        {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        [Route("/HorasEquipo")]
+        [HttpGet]
+        public IActionResult HorasEquipo() //Corregir este metodo para que redireccione
+        {
+            if (HttpContext.Session.GetInt32("_id") == null || HttpContext.Session.GetInt32("_id") == -1)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
     }
 }
