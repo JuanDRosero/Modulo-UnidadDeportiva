@@ -9,7 +9,7 @@ namespace Modulo_UnidadDeportiva.services
         private readonly string _connectionString;
         public AutenticacionService(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection");
+            _connectionString = config.GetConnectionString("OracleDBConnection2");
         }
 
         public Empleado IngresarAuxiliar(string codigo)
@@ -61,18 +61,7 @@ namespace Modulo_UnidadDeportiva.services
                         "EC.codespacio=E.codespacio";
                     command.CommandType = System.Data.CommandType.Text;
                     OracleDataReader reader = command.ExecuteReader();
-                    var empleado = new Empleado();
-                    while (reader.Read())
-                    {
-                        empleado.Codigo = reader["codempleado"].ToString();
-                        empleado.NombreEmpleado = reader["nomempleado"].ToString();
-                        empleado.ApellidoEmpleado = reader["apellempleado"].ToString();
-                        empleado.Cargo = reader["cargo"].ToString();
-                        empleado.Sede = reader["sede"].ToString();
-                        empleado.FechaInicio = new DateTime(); // Que fecha usar???????????
-                    }
-                    return empleado;
-                    /*if (reader.HasRows)
+                    if (reader.HasRows)
                     {
                         var empleado = new Empleado();
                         while (reader.Read())
@@ -89,7 +78,7 @@ namespace Modulo_UnidadDeportiva.services
                     else
                     {
                         return null;
-                    }*/
+                    }
                 }
             }
         }

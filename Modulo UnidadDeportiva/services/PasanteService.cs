@@ -10,7 +10,7 @@ namespace Modulo_UnidadDeportiva.services
 
         public PasanteService(IConfiguration config, IElementosDep elementos)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection");
+            _connectionString = config.GetConnectionString("OracleDBConnection2");
             _elementos = elementos;
         }
 
