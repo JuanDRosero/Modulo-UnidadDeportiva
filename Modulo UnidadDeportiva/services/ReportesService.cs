@@ -9,7 +9,7 @@ namespace Modulo_UnidadDeportiva.services
 
         public ReportesService(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection");
+            _connectionString = config.GetConnectionString("OracleDBConnection2");
         }
 
         public List<EquipoModel> GetEquipos()

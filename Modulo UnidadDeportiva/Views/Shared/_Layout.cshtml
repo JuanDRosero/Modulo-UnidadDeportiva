@@ -14,7 +14,7 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed mt-5">
     @RenderBody()
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
@@ -48,37 +48,44 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
-                        <div class="sb-sidenav-menu-heading">Opciones de auxiliares</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#auxiliares"
-                           aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>
-                            Asistencia
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="auxiliares" aria-labelledby="headingOne"
-                             data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaDocente">Asistencia Docente</a>
-                                <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaPasante">Asistencia Pasante</a>
-                                <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaMiembro">Asistencia miembro de equipo</a>
-                            </nav>
-                        </div>
-                        <!-- Sección para los directivos -->
-                        <div class="sb-sidenav-menu-heading">Opciones de directivos</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#directivos"
-                           aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-file-pdf"></i></div>
-                            Generación de reporte
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="directivos" aria-labelledby="headingOne"
-                             data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" asp-controller="Director" asp-action="HorasPasante">Reporte horas asistidas de pasantes</a>
-                                <a class="nav-link" asp-controller="Director" asp-action="HorasEquipo">Reporte horas asistidas de equipos</a>
-                            </nav>
-                            <!-- -->
-                        </div>
+                        @if (Context.Session.GetInt32("_id")==1)
+                        {
+                            <div class="sb-sidenav-menu-heading">Opciones de auxiliares</div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#auxiliares"
+                               aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-clipboard-question"></i></div>
+                                Asistencia
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="auxiliares" aria-labelledby="headingOne"
+                                 data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaDocente">Asistencia Docente</a>
+                                    <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaPasante">Asistencia Pasante</a>
+                                    <a class="nav-link" asp-controller="Auxiliar" asp-action="AsistenciaMiembro">Asistencia miembro de equipo</a>
+                                </nav>
+                            </div>
+                        }
+                        else if(Context.Session.GetInt32("_id")==2)
+                        {
+                            <!-- Sección para los directivos -->
+                            <div class="sb-sidenav-menu-heading">Opciones de directivos</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#directivos"
+                               aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                                Generación de reporte
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="directivos" aria-labelledby="headingOne"
+                                 data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" asp-controller="Director" asp-action="HorasPasante">Reporte horas asistidas de pasantes</a>
+                                    <a class="nav-link" asp-controller="Director" asp-action="HorasEquipo">Reporte horas asistidas de equipos</a>
+                                </nav>
+                                <!-- -->
+                            </div>
+                        }
+                        
                     </div>
             </nav>
         </div>

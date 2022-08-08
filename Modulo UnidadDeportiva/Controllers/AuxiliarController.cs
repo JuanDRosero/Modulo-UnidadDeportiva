@@ -29,8 +29,8 @@ namespace Modulo_UnidadDeportiva.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            
-            return View(_auth.IngresarAuxiliar(HttpContext.Session.GetString("_cod")));
+            var aux = _auth.IngresarAuxiliar(HttpContext.Session.GetString("_cod"));
+            return View(aux);
         }
         [Route("/Docente")]
         [HttpGet]

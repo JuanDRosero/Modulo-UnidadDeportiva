@@ -31,22 +31,25 @@ namespace Modulo_UnidadDeportiva.Controllers
         {
             var usuario = _aut.IngresarAuxiliar(inputCod);
             if (usuario == null)
+            {
                 usuario = _aut.IngresarDirector(inputCod);
+            }
             else
             {
                 HttpContext.Session.SetInt32("_id", 1); //1 Aux
             }
-                
-                
 
             if (usuario==null)
             {
                 return View();
             }
+            else if (HttpContext.Session.GetInt32("_id")!=1)
+            {
+                HttpContext.Session.SetInt32("_id", 2); //ID Sesion 2 Director
+               
+            }
             HttpContext.Session.SetString("_cod", usuario.Codigo);
-            HttpContext.Session.SetInt32("_id", 2); //ID Sesion 2 Director
             HttpContext.Session.SetString("Nombre", usuario.NombreEmpleado + " " + usuario.ApellidoEmpleado); //ID Sesion 1 Auxiliar
-
             switch (HttpContext.Session.GetInt32("_id"))
             {
                 case 1:
