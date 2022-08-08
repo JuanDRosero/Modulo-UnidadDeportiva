@@ -21,9 +21,9 @@ namespace Modulo_UnidadDeportiva.services
                     con.Open();
                     command.Connection = con;
                     command.CommandText = $"select E.codempleado, E.nomempleado, E.apellempleado, C.descargo cargo, " +
-                        $"E.nomespacio sede from empleado E, empleado_cargo EC, espacio E, cargo C where " +
-                        $"EC.codempleado={codigo} and EC.idcargo=C.idcargo and EC.idcargo='1' and " +
-                        $"EC.codespacio=E.codespacio";
+                        "E.nomespacio sede from empleado E, empleado_cargo EC, espacio E, cargo C where EC.codempleado = E.codempleado " +
+                        $"and EC.codempleado={codigo} and EC.idcargo=C.idcargo and EC.idcargo='1' and " +
+                        "EC.codespacio=E.codespacio";
                     command.CommandType = System.Data.CommandType.Text;
                     OracleDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -55,13 +55,24 @@ namespace Modulo_UnidadDeportiva.services
                 {
                     con.Open();
                     command.Connection = con;
-                    command.CommandText = $"select E.codempleado, E.nomempleado, E.apellempleado, C.descargo cargo, " +
-                        $"E.nomespacio sede from empleado E, empleado_cargo EC, espacio E, cargo C where " +
-                        $"EC.codempleado={codigo} and EC.idcargo=C.idcargo and EC.idcargo='3' and " +
-                        $"EC.codespacio=E.codespacio";
+                    command.CommandText = "select E.codempleado, E.nomempleado, E.apellempleado, C.descargo cargo, " +
+                        "E.nomespacio sede from empleado E, empleado_cargo EC, espacio E, cargo C where EC.codempleado = E.codempleado " +
+                        "and EC.codempleado='"+codigo+"' and EC.idcargo=C.idcargo and EC.idcargo='3' and " +
+                        "EC.codespacio=E.codespacio";
                     command.CommandType = System.Data.CommandType.Text;
                     OracleDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
+                    var empleado = new Empleado();
+                    while (reader.Read())
+                    {
+                        empleado.Codigo = reader["codempleado"].ToString();
+                        empleado.NombreEmpleado = reader["nomempleado"].ToString();
+                        empleado.ApellidoEmpleado = reader["apellempleado"].ToString();
+                        empleado.Cargo = reader["cargo"].ToString();
+                        empleado.Sede = reader["sede"].ToString();
+                        empleado.FechaInicio = new DateTime(); // Que fecha usar???????????
+                    }
+                    return empleado;
+                    /*if (reader.HasRows)
                     {
                         var empleado = new Empleado();
                         while (reader.Read())
@@ -78,7 +89,7 @@ namespace Modulo_UnidadDeportiva.services
                     else
                     {
                         return null;
-                    }
+                    }*/
                 }
             }
         }

@@ -27,11 +27,11 @@ namespace Modulo_UnidadDeportiva.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(string codigo)
+        public IActionResult Index(string inputCod)
         {
-            var usuario = _aut.IngresarAuxiliar(codigo);
+            var usuario = _aut.IngresarAuxiliar(inputCod);
             if (usuario == null)
-                usuario = _aut.IngresarDirector(codigo);
+                usuario = _aut.IngresarDirector(inputCod);
             else
             {
                 HttpContext.Session.SetInt32("_id", 1); //1 Aux
