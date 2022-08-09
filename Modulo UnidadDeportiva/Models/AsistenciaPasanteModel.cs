@@ -5,7 +5,7 @@ namespace Modulo_UnidadDeportiva.Models
     public class AsistenciaPasanteModel
     {
         #region PropiedadesBusqueda
-        public int? codEstudiante { get; set; }
+        public string codEstudiante { get; set; }
         #endregion
 
         public string nombrePractica { get; set; }  //No hay tabla practica

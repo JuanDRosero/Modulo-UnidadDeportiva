@@ -63,7 +63,7 @@ namespace Modulo_UnidadDeportiva.Controllers
 
             if (model.codEstudiante!=null)
             {
-                model = _pasante.GetAsistenciaPasante((int)model.codEstudiante);
+                model = _pasante.GetAsistenciaPasante(model.codEstudiante);
             }
             return View(model);
         }
