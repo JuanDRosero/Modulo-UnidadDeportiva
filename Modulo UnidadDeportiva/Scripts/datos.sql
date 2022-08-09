@@ -1,5 +1,5 @@
 insert into tipoespacio (idtipoespacio, desctipoespacio) values ('1', 'unidad');
-insert into tipoespacio (idtipoespacio, desctipoespacio) values ('2', 'espacio');
+insert into tipoespacio (idtipoespacio, desctipoespacio) values ('2', 'sede');
 insert into tipoespacio (idtipoespacio, desctipoespacio) values ('3', 'campo');
 insert into tipoespacio (idtipoespacio, desctipoespacio) values ('4', 'pista');
 insert into tipoespacio (idtipoespacio, desctipoespacio) values ('5', 'salon');
@@ -20,6 +20,7 @@ insert into deporte (iddeporte, nomdeporte) values ('9', 'aerobicos');
 insert into deporte (iddeporte, nomdeporte) values ('10', 'boxeo');
 insert into deporte (iddeporte, nomdeporte) values ('11', 'artes marciales');
 insert into deporte (iddeporte, nomdeporte) values ('12', 'gimnasia olimpica');
+insert into deporte (iddeporte, nomdeporte) values ('13', 'baloncesto');
 
 
 insert into estado (idestado, descestado) values ('1', 'activo');
@@ -119,10 +120,10 @@ insert into empleado (codempleado, nomempleado, apellempleado, fecharegistro, co
 insert into empleado (codempleado, nomempleado, apellempleado, fecharegistro, correoud) values ('1110', 'sebastian', 'sanchez', to_date('2021-08-24', 'yyyy-mm-dd'), 'ssanchez@ud.com');
 
 
-insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('01', '1', '01', 'sede');
-insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('02', '2', '02', '4 parques');
+insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('01', '1', '01', 'deporte');
+insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('02', '2', '02', 'la maca');
 insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('03', '2', '03', 'la 40');
-insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('04', '2', '04', 'sabio caldas');
+insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('04', '2', '04', 'la tecno');
 insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('05', '3', '05', 'parque nacional');
 insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('06', '4', '06', 'atletismo');
 insert into espacio (codespacio, idtipoespacio, esp_codespacio, nomespacio) values ('07', '6', '07', 'laguito');
@@ -198,4 +199,66 @@ insert into elemendeportivo (consecelemento, idtipoelemento, idestado, idmarca, 
 insert into elemendeportivo (consecelemento, idtipoelemento, idestado, idmarca, codespacio, fecharegistro) values ('11','11','1','11','05',to_date('2022-06-06', 'yyyy-mm-dd'));
 insert into elemendeportivo (consecelemento, idtipoelemento, idestado, idmarca, codespacio, fecharegistro) values ('12','12','1','12','05',to_date('2022-07-06', 'yyyy-mm-dd'));
 insert into elemendeportivo (consecelemento, idtipoelemento, idestado, idmarca, codespacio, fecharegistro) values ('13','13','1','1','05',to_date('2022-08-06', 'yyyy-mm-dd'));
+
+insert into relationship_12 (iddeporte, idtipoelemento) values ('1','6');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('2','5');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('3','4');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('3','13');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('5','3');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('5','9');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('6','2');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('10','8');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('10','10');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('10','12');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('12','11');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('12','7');
+insert into relationship_12 (iddeporte, idtipoelemento) values ('13','1');
+
+insert into relationship_13 (codespacio, iddeporte) values ('06','1');
+insert into relationship_13 (codespacio, iddeporte) values ('05','9');
+insert into relationship_13 (codespacio, iddeporte) values ('02','11');
+insert into relationship_13 (codespacio, iddeporte) values ('05','2');
+insert into relationship_13 (codespacio, iddeporte) values ('03','3');
+insert into relationship_13 (codespacio, iddeporte) values ('07','4');
+insert into relationship_13 (codespacio, iddeporte) values ('05','5');
+insert into relationship_13 (codespacio, iddeporte) values ('05','6');
+insert into relationship_13 (codespacio, iddeporte) values ('04','7');
+insert into relationship_13 (codespacio, iddeporte) values ('02','8');
+insert into relationship_13 (codespacio, iddeporte) values ('18','10');
+insert into relationship_13 (codespacio, iddeporte) values ('06','12');
+insert into relationship_13 (codespacio, iddeporte) values ('05','13');
+
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020001', '02', 'laura', 'romero', to_date('2019-01-11', 'yyyy-mm-dd'), 'lromero@ud.com', to_date('2000-01-11', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020002', '02', 'diego', 'diaz', to_date('2019-02-12', 'yyyy-mm-dd'), 'ddiaz@ud.com', to_date('2000-02-12', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020003', '02', 'juan', 'perez', to_date('2019-03-13', 'yyyy-mm-dd'), 'jperez@ud.com', to_date('2000-03-13', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020004', '03', 'andres', 'rodriguez', to_date('2019-04-14', 'yyyy-mm-dd'), 'arodriguez@ud.com', to_date('2001-04-14', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020005', '03', 'julian', 'gonzales', to_date('2019-05-15', 'yyyy-mm-dd'), 'jgonzales@ud.com', to_date('2001-05-15', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020006', '03', 'valeria', 'montenegro', to_date('2019-06-16', 'yyyy-mm-dd'), 'vmontenegro@ud.com', to_date('2001-06-16', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020007', '04', 'sofia', 'castillo', to_date('2019-07-17', 'yyyy-mm-dd'), 'scastillo@ud.com', to_date('2002-07-17', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020008', '04', 'lina', 'torres', to_date('2019-08-18', 'yyyy-mm-dd'), 'ltorres@ud.com', to_date('2002-08-18', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020009', '04', 'luis', 'galindo', to_date('2019-09-19', 'yyyy-mm-dd'), 'lgalindo@ud.com', to_date('2002-09-19', 'yyyy-mm-dd'));
+insert into estudiante (codestu, codespacio, nomestu, apelestu, fecharegestu, correoudestu, fechanacestu) values ('20181020010', '04', 'lucia', 'acosta', to_date('2019-10-20', 'yyyy-mm-dd'), 'lacosta@ud.com', to_date('2002-10-20', 'yyyy-mm-dd'));
+
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('100', '001', '20181020001');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('101', '001', '20181020002');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('102', '001', '20181020003');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('103', '002', '20181020004');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('104', '002', '20181020005');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('105', '002', '20181020006');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('106', '003', '20181020007');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('107', '003', '20181020008');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('108', '003', '20181020009');
+insert into miembroequipo (itemmiembro, conseequipo, codestu) values ('109', '003', '20181020010');
+
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('200', '100', '001', '1');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('201', '101', '001', '1');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('202', '102', '001', '1');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('203', '103', '002', '2');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('204', '104', '002', '2');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('205', '105', '002', '2');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('206', '106', '003', '3');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('207', '107', '003', '3');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('208', '108', '003', '3');
+insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('209', '109', '003', '3');
+
 
