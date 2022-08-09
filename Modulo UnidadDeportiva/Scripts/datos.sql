@@ -261,4 +261,15 @@ insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecpr
 insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('208', '108', '003', '3');
 insert into asismiembroequipo (conmiemequipo, itemmiembro, conseequipo, consecprogra) values ('209', '109', '003', '3');
 
-
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('1','1110','3','20181020001','1',to_date('2020-02-05','yyyy-mm-dd'),to_date('2020-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('2','1101','3','','2',to_date('2020-03-05','yyyy-mm-dd'),to_date('2020-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('3','0001','2','','3',to_date('2020-04-05','yyyy-mm-dd'),to_date('2020-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('4','1110','3','20181020002','4',to_date('2020-05-05','yyyy-mm-dd'),to_date('2020-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('5','1101','3','','5',to_date('2020-06-05','yyyy-mm-dd'),to_date('2020-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('6','1101','3','','6',to_date('2021-02-05','yyyy-mm-dd'),to_date('2021-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('7','1110','3','','7',to_date('2021-02-05','yyyy-mm-dd'),to_date('2021-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('8','1110','3','','8',to_date('2021-02-05','yyyy-mm-dd'),to_date('2021-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('9','0001','2','','9',to_date('2021-02-05','yyyy-mm-dd'),to_date('2021-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('10','1110','3','','10',to_date('2022-02-05','yyyy-mm-dd'),to_date('2022-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('11','0010','2','','11',to_date('2022-02-05','yyyy-mm-dd'),to_date('2022-07-05','yyyy-mm-dd'));
+insert into responsable (consecres, codempleado, idrol, codestu, consecprogra, fechaini, fechafin) values ('12','0010','2','','12',to_date('2022-02-05','yyyy-mm-dd'),to_date('2022-07-05','yyyy-mm-dd'));
