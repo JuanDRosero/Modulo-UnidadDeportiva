@@ -24,13 +24,18 @@ namespace Modulo_UnidadDeportiva.services
                 {
                     con.Open();
                     command.Connection = con;
-                    command.CommandText = $"select distinct E.nomEmpleado||' '||E.apellEmpleado Docente from " +
-                        $"empleado E, empleado_cargo Ec where Ec.idcargo like '%2%' and " +
-                        $"E.codempleado = Ec.codempleado and E.nomEmpleado = {nombre} and E.apellEmpleado = {Apellido}";
+                    command.CommandText = $"select E.codempleado id, C.noinscrito, D.nomdeporte, Esp.nomespacio from (select E.codempleado from empleado E where E.nomempleado = 'sebastian' and E.apellempleado= 'sanchez') E, responsable R, (select P.* from programacion P where P.idactividad= 'cu') C, espacio Esp, deporte D  where R.consecprogra=C.consecprogra and R.idrol=2 and R.codempleado=E.codempleado and C.iddia=(select case when to_char(sysdate,'day') like '%lun%' then 'l' when to_char(sysdate,'day') like '%mart%' then 'm' when to_char(sysdate,'day') like '%mi%' then 'w' when to_char(sysdate,'day') like '%jue%' then 'j' when to_char(sysdate,'day') like '%vie%' then 'v' end Dia from dual) and C.iddeporte=D.iddeporte and C.codespacio=Esp.codespacio";
                     command.CommandType = System.Data.CommandType.Text;
                     OracleDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
+                        reader.Read();
+                        adm.HasItems = true;
+                        adm.IDDocente = Convert.ToInt32(reader["codempleado"]);
+                        adm.Curso = reader["nomdeporte"].ToString();
+                        adm.Espacio = new Espacio() { NomEspacio = reader["nomespacio"].ToString() };
+                        adm.Deporte = new Deporte() { Nombre = reader["nomdeporte"].ToString() };
+                        adm.numEstudiantes = Convert.ToInt32(reader["noinscrito"]);
 
                     }
                     else
