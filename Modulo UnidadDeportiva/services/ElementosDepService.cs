@@ -12,7 +12,7 @@ namespace Modulo_UnidadDeportiva.services
             _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
-        public List<Elemento> GetElementos(int SedeID, int DepID, DateTime fechaHora)
+        public List<Elemento> GetElementos(string SedeID, string DepID, DateTime fechaHora)
         {
             fechaHora = DateTime.Now;
             var lista = new List<Elemento>();
@@ -22,11 +22,13 @@ namespace Modulo_UnidadDeportiva.services
                 {
                     con.Open();
                     com.Connection = con;
-                    com.CommandText = "select TE.desctipoelemento TIPO, E.descestado ESTADO, ES.nomespacio SEDE, D.nomDeporte DEPORTE, M.nommarca MARCA " +
-                        "from elemendeportivo EL, tipoelemento TE, estado E, espacio ES, deporte D, relationship_12 D_TE, marca M " +
-                        "where EL.idtipoelemento = TE.idtipoelemento and E.idestado = EL.idestado and D.iddeporte = D_TE.iddeporte " +
-                        $"and TE.idtipoelemento = D_TE.idtipoelemento and ES.codespacio = EL.codespacio and EL.codespacio= '{SedeID}' and D_TE.iddeporte='{DepID}'" +
-                        "and M.idmarca = EL.idmarca and EL.idestado = 1";
+                    com.CommandText = $"select TE.idtipoelemento idtipoelemento," +
+                        $" TE.desctipoelemento TIPO, E.descestado ESTADO, ES.nomespacio SEDE, M.nommarca marca, " +
+                        $"D.nomDeporte DEPORTE from elemendeportivo EL, tipoelemento TE, estado E, espacio ES, " +
+                        $"deporte D, relationship_12 D_TE, marca M where EL.idtipoelemento=TE.idtipoelemento and " +
+                        $"E.idestado=EL.idestado and D.iddeporte=D_TE.iddeporte and " +
+                        $"TE.idtipoelemento = D_TE.idtipoelemento " +
+                        $"and ES.codespacio=EL.codespacio and M.idmarca=EL.idmarca and EL.idestado=1";
                     var reader = com.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -35,10 +37,10 @@ namespace Modulo_UnidadDeportiva.services
                             lista.Add(new Elemento()
                             {
                                 IDElementoD = Convert.ToInt32(reader["idtipoelemento"]),
-                                DescTipo = reader["desctipoelemento"].ToString(),
-                                EstadoDesc = reader["descestado"].ToString(),
-                                Marca = reader["marcadesc"].ToString(),
-                                Deporte = reader["nomdeporte"].ToString()
+                                DescTipo = reader["TIPO"].ToString(),
+                                EstadoDesc = reader["ESTADO"].ToString(),
+                                Marca = reader["marca"].ToString(),
+                                Deporte = reader["DEPORTE"].ToString()
                             }); ;
                         }
                     }

@@ -16,8 +16,8 @@ namespace Modulo_UnidadDeportiva.services
 
         public AsistenciaPasanteModel GetAsistenciaPasante(int codigo)
         {
-            int idSede = 0;
-            int depid = 0;
+            string idSede = "";
+            string depid = "";
             var aPM = new AsistenciaPasanteModel();
             //3.2.2.1. y  3.2.2.1.
             foreach (var item in _elementos.GetElementos(idSede, depid, new DateTime()))

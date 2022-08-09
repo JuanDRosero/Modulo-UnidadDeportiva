@@ -18,8 +18,8 @@ namespace Modulo_UnidadDeportiva.Models
         public Deporte Deporte { get; set; }
         public int numEstudiantes { get; set; }
 
-        public List<SelectListItem>? ElementosDisp { get; set; }
-        public List<string>? ElementosAPrestar{ get; set; }
+        public List<SelectListItem> ElementosDisp { get; set; }
+        public List<string> ElementosAPrestar{ get; set; }
 
     }
 }

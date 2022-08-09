@@ -8,10 +8,12 @@ namespace Modulo_UnidadDeportiva.services
     {
         private readonly string _connectionString;
         private readonly IElementosDep _elementos;
-        public DocenteService(IConfiguration config, IElementosDep elementos)
+        private readonly ILogger<DocenteService> logger;
+        public DocenteService(IConfiguration config, IElementosDep elementos, ILogger<DocenteService> logger)
         {
             _connectionString = config.GetConnectionString("OracleDBConnection");
             _elementos = elementos;
+            this.logger = logger;
         }
 
         public AsistenciaDocenteModel GetAsistenciaDocente(String nombre, string Apellido)
@@ -25,7 +27,8 @@ namespace Modulo_UnidadDeportiva.services
                     con.Open();
                     command.Connection = con;
                     command.BindByName = true;
-                    command.CommandText = $"select E.codempleado id, C.noinscrito, D.nomdeporte, Esp.nomespacio " +
+                    command.CommandText = $"select E.codempleado id, D.iddeporte iddeporte, Esp.codespacio codespacio, " +
+                        $"C.noinscrito, D.nomdeporte, Esp.nomespacio " +
                         $"from (select E.codempleado from empleado E where E.nomempleado = '{nombre}' and " +
                         $"E.apellempleado= '{Apellido}') E, responsable R, (select P.* from programacion P where " +
                         $"P.idactividad= 'cu') C, espacio Esp, deporte D  where R.consecprogra=C.consecprogra and " +
@@ -42,8 +45,15 @@ namespace Modulo_UnidadDeportiva.services
                         adm.HasItems = true;
                         adm.IDDocente = Convert.ToInt32(reader["id"].ToString());
                         adm.Curso = reader["nomdeporte"].ToString();
-                        adm.Espacio = new Espacio() { NomEspacio = reader["nomespacio"].ToString() };
-                        adm.Deporte = new Deporte() { Nombre = reader["nomdeporte"].ToString() };
+                        adm.Espacio = new Espacio() {
+                            NomEspacio = reader["nomespacio"].ToString(),
+                            CodEspacio = reader["codespacio"].ToString()
+
+                        };
+                        adm.Deporte = new Deporte() { 
+                            Nombre = reader["nomdeporte"].ToString(),
+                            IdDeporte = reader["iddeporte"].ToString()
+                        };
                         adm.numEstudiantes = Convert.ToInt32(reader["noinscrito"]);
 
                     }
@@ -62,14 +72,18 @@ namespace Modulo_UnidadDeportiva.services
                 */
                 //Aca tendria que ir una consulta que con el nombre y el apellido y por debajo la aplicacion
                 //obtiene los datos del docente y la fecha actual y  retorna los datos  AsistenciaViewModel
-                int idSede = 0, depid = 0;
-            foreach (var item in _elementos.GetElementos(idSede, depid, new DateTime()))
+                string idSede = adm.Espacio.CodEspacio, depid = adm.Deporte.IdDeporte;
+            var lista = _elementos.GetElementos(idSede, depid, new DateTime());
+            adm.ElementosDisp = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+            foreach (var item in lista)
             {
                 adm.ElementosDisp.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
                 {
                     Value = item.IDElementoD.ToString(),
                     Text = item.DescTipo
+
                 });
+                logger.LogError(item.IDElementoD.ToString());
             }
             
             return adm;
