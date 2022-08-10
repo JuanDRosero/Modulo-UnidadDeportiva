@@ -11,7 +11,7 @@ namespace Modulo_UnidadDeportiva.services
         private readonly ILogger<DocenteService> logger;
         public DocenteService(IConfiguration config, IElementosDep elementos, ILogger<DocenteService> logger)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection");
+            _connectionString = config.GetConnectionString("OracleDBConnection2");
             _elementos = elementos;
             this.logger = logger;
         }
@@ -19,7 +19,9 @@ namespace Modulo_UnidadDeportiva.services
         public AsistenciaDocenteModel GetAsistenciaDocente(String nombre, string Apellido)
         {
 
-            var adm = new AsistenciaDocenteModel();
+            AsistenciaDocenteModel adm = new AsistenciaDocenteModel();
+
+
             using (OracleConnection con = new OracleConnection(_connectionString))
             {
                 using(OracleCommand command = new OracleCommand())
@@ -41,9 +43,8 @@ namespace Modulo_UnidadDeportiva.services
                         $"and P.consecprogra = R.consecres";
                     command.CommandType = System.Data.CommandType.Text;
                     OracleDataReader reader = command.ExecuteReader();
-                    if (reader.HasRows)
+                    while (reader.Read())
                     {
-                        reader.Read();
                         adm.HasItems = true;
                         adm.IDDocente = Convert.ToInt32(reader["id"].ToString());
                         adm.Curso = reader["nomdeporte"].ToString();
@@ -59,11 +60,6 @@ namespace Modulo_UnidadDeportiva.services
                         adm.numEstudiantes = Convert.ToInt32(reader["noinscrito"]);
                         adm.idResponsable = Convert.ToInt32(reader["consecres"].ToString());
                         adm.idProgramacion = Convert.ToInt32(reader["consecprogra"].ToString());
-                    }
-                    else
-                    {
-                        adm.HasItems = false;
-                    }
                 }
             }
 

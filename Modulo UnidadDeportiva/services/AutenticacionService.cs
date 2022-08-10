@@ -9,7 +9,7 @@ namespace Modulo_UnidadDeportiva.services
         private readonly string _connectionString;
         public AutenticacionService(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection");
+            _connectionString = config.GetConnectionString("OracleDBConnection2");
         }
 
         public Empleado IngresarAuxiliar(string codigo)
