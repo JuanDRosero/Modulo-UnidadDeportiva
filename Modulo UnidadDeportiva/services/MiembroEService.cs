@@ -17,30 +17,40 @@ namespace Modulo_UnidadDeportiva.services
         {
             bool IsPractica = false;
             bool IsCorrecto = false;
-            using (OracleConnection con = new OracleConnection())
+            int iditem = 0;
+            int programacion = 0;
+            using (OracleConnection con = new OracleConnection(_connectionString))
             {
                 using (OracleCommand command = new OracleCommand())
                 {
                     con.Open();
                     command.Connection= con;
-                    command.CommandText= "select * from (select P.* from programacion P where idactividad= 'en') PE, deporte D, equipo E, miebroequipo ME, estudiante E"+
-                                        $"where PE.iddeporte = D.iddeporte and E.iddeporte = D.iddeporte and E.conseequipo = ME.conseequipo and ME.conseequipo= {equipo} and ME.codestu='{codigoEstudiante}' and"+ 
-	                                        "PE.iddia=(select to_char(sysdate, 'day') Fecha, case when to_char(sysdate,'day') like '%lun%' then 'l' when to_char(sysdate,'day')"+
-                                         "like '%mart%' then 'm' when to_char(sysdate,'day') like '%mi%' then 'w' when to_char(sysdate,'day') like '%jue%' then 'j' when to_char(sysdate,'day')"+
-                                         "like '%vie%' then 'v' end Dia from dual)";
+                    command.CommandText= $"select ME.itemmiembro item, PE.consecprogra program from (select P.* from programacion P where idactividad= 'en') PE, deporte D, equipo E, miembroequipo ME, estudiante E "+
+                                         $"where PE.iddeporte = D.iddeporte and E.iddeporte = D.iddeporte and E.conseequipo = ME.conseequipo and ME.conseequipo= '{equipo}' and ME.codestu='{codigoEstudiante}' and "+ 
+	                                     $"PE.iddia=(select case when to_char(sysdate-1,'day') like '%lun%' then 'l' when to_char(sysdate-1,'day')"+
+                                         $"like '%mart%' then 'm' when to_char(sysdate-1,'day') like '%mi%' then 'w' when to_char(sysdate-1,'day') like '%jue%' then 'j' when to_char(sysdate-1,'day')"+
+                                         $"like '%vie%' then 'v' end Dia from dual)";
                     OracleDataReader reader = command.ExecuteReader();
                     IsPractica = reader.HasRows;
+                    if (IsPractica)
+                    {
+                        reader.Read();
+                        iditem = Convert.ToInt32(reader["item"]);
+                        programacion = Convert.ToInt32(reader["program"]);
+                    }
                 }
             }
             if (IsPractica)
             {
-                using (OracleConnection con = new OracleConnection())
+                int random = new Random().Next(1,1000);
+                using (OracleConnection con = new OracleConnection(_connectionString))
                 {
                     using (OracleCommand comand = new OracleCommand())
                     {
                         con.Open();
-                        comand.Connection= con;
-                        comand.CommandText = "aca va el comando";
+                        comand.Connection = con;
+                        comand.CommandText = $"insert into asismiembroequipo (conmiemequipo, itemmiembro, " +
+                            $"conseequipo, consecprogra) values ({random}, {iditem}, {equipo}, '{programacion}')";
                         comand.ExecuteNonQuery();
                         IsCorrecto = true;
                     }

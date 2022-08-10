@@ -9,7 +9,7 @@ namespace Modulo_UnidadDeportiva.services
         private readonly string _connectionString;
         public ElementosDepService(IConfiguration config)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection2");
+            _connectionString = config.GetConnectionString("OracleDBConnection");
         }
 
         public List<Elemento> GetElementos(string SedeID, string DepID, DateTime fechaHora)

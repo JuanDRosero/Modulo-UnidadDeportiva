@@ -11,7 +11,7 @@ namespace Modulo_UnidadDeportiva.services
         private readonly ILogger<DocenteService> logger;
         public DocenteService(IConfiguration config, IElementosDep elementos, ILogger<DocenteService> logger)
         {
-            _connectionString = config.GetConnectionString("OracleDBConnection2");
+            _connectionString = config.GetConnectionString("OracleDBConnection");
             _elementos = elementos;
             this.logger = logger;
         }
@@ -24,7 +24,7 @@ namespace Modulo_UnidadDeportiva.services
 
             using (OracleConnection con = new OracleConnection(_connectionString))
             {
-                using(OracleCommand command = new OracleCommand())
+                using (OracleCommand command = new OracleCommand())
                 {
                     con.Open();
                     command.Connection = con;
@@ -48,52 +48,55 @@ namespace Modulo_UnidadDeportiva.services
                         adm.HasItems = true;
                         adm.IDDocente = Convert.ToInt32(reader["id"].ToString());
                         adm.Curso = reader["nomdeporte"].ToString();
-                        adm.Espacio = new Espacio() {
+                        adm.Espacio = new Espacio()
+                        {
                             NomEspacio = reader["nomespacio"].ToString(),
                             CodEspacio = reader["codespacio"].ToString()
 
                         };
-                        adm.Deporte = new Deporte() { 
+                        adm.Deporte = new Deporte()
+                        {
                             Nombre = reader["nomdeporte"].ToString(),
                             IdDeporte = reader["iddeporte"].ToString()
                         };
                         adm.numEstudiantes = Convert.ToInt32(reader["noinscrito"]);
                         adm.idResponsable = Convert.ToInt32(reader["consecres"].ToString());
                         adm.idProgramacion = Convert.ToInt32(reader["consecprogra"].ToString());
+                    }
                 }
-            }
 
-            using (OracleConnection con = new OracleConnection(_connectionString))
-            {
-                using (OracleCommand command = new OracleCommand())
+                using (OracleConnection con2 = new OracleConnection(_connectionString))
                 {
-                    con.Open();
-                    command.Connection = con;
-                    command.BindByName = true;
-                    command.CommandText = $"insert into asistirresponsable (consecasisres, consecres, " +
-                            $"consecprogra, fechaasisres, horaasisres) values " +
-                            $"('" + adm.idResponsable + "','" + adm.idResponsable + "','" + adm.idProgramacion + "'," +
-                            "to_date(sysdate, 'yyyy-mm-dd'),to_date(sysdate, 'yyyy-mm-dd hh:mi'))";
-                    command.ExecuteNonQuery();
+                    using (OracleCommand command = new OracleCommand())
+                    {
+                        con2.Open();
+                        command.Connection = con2;
+                        command.BindByName = true;
+                        command.CommandText = $"insert into asistirresponsable (consecasisres, consecres, " +
+                                $"consecprogra, fechaasisres, horaasisres) values " +
+                                $"('" + adm.idResponsable + "','" + adm.idResponsable + "','" + adm.idProgramacion + "'," +
+                                "to_date(sysdate, 'yyyy-mm-dd'),to_date(sysdate, 'yyyy-mm-dd hh:mi'))";
+                        command.ExecuteNonQuery();
+                    }
                 }
-            }
 
-            string idSede = adm.Espacio.CodEspacio, depid = adm.Deporte.IdDeporte;
-            var lista = _elementos.GetElementos(idSede, depid, new DateTime());
-            adm.ElementosDisp = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
-            foreach (var item in lista)
-            {
-                adm.ElementosDisp.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
+                string idSede = adm.Espacio.CodEspacio, depid = adm.Deporte.IdDeporte;
+                var lista = _elementos.GetElementos(idSede, depid, new DateTime());
+                adm.ElementosDisp = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+                foreach (var item in lista)
                 {
-                    Value = item.IDElementoD.ToString(),
-                    Text = item.DescTipo
+                    adm.ElementosDisp.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
+                    {
+                        Value = item.IDElementoD.ToString(),
+                        Text = item.DescTipo
 
-                });
-                logger.LogError(item.IDElementoD.ToString());
+                    });
+                    logger.LogError(item.IDElementoD.ToString());
+                }
+
+                return adm;
             }
-            
-            return adm;
+
         }
-
     }
 }

@@ -16,7 +16,37 @@ namespace Modulo_UnidadDeportiva.services
 
         public List<EquipoModel> GetEquipos()
         {
-            throw new NotImplementedException();
+            var lista = new List<EquipoModel>();
+            using (OracleConnection con = new OracleConnection(_connectionString))
+            {
+                using (OracleCommand command = new OracleCommand())
+                {
+                    con.Open();
+                    command.Connection = con;
+                    command.BindByName = true;
+                    command.CommandText = "select Est.nomestu||' '||Est.apelestu nombre, E.nomespacio, P.idperiodo, " +
+                        "D.nomdeporte from (select P.* from programacion P where idactividad= 'en') P, " +
+                        "asismiembroequipo Ase, miembroequipo Me, estudiante Est, espacio E, equipo Eq, deporte D " +
+                        "where P.codespacio = E.codespacio and Ase.consecprogra = P.consecprogra and " +
+                        "Ase.itemmiembro = Me.itemmiembro and Me.codestu = Est.codestu and " +
+                        "Me.conseequipo = Eq.conseequipo and Eq.iddeporte = D.iddeporte";
+                    OracleDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            lista.Add(new EquipoModel()
+                            {
+                                NombreEquipo = reader["nomdeporte"].ToString(),
+                                Miembro = reader["nombre"].ToString(),
+                                Periodo = reader["idperiodo"].ToString(),
+                                Sede = reader["nomespacio"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return lista;
         }
 
         public List<PasanteModel> getPasantes()
@@ -38,16 +68,18 @@ namespace Modulo_UnidadDeportiva.services
                     OracleDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        reader.Read();
-                        lista.Add(new PasanteModel()
+                        while (reader.Read())
                         {
-                            Nombre = reader["nombre"].ToString(),
-                            CodgoPasante = reader["codestu"].ToString(),
-                            Periodo = reader["idperiodo"].ToString(),
-                            Sede = reader["nomespacio"].ToString(),
-                            FechaHoraRegistro = Convert.ToDateTime(reader["fechaAsisRes"])
+                            lista.Add(new PasanteModel()
+                            {
+                                Nombre = reader["nombre"].ToString(),
+                                CodgoPasante = reader["codestu"].ToString(),
+                                Periodo = reader["idperiodo"].ToString(),
+                                Sede = reader["nomespacio"].ToString(),
+                                FechaHoraRegistro = Convert.ToDateTime(reader["fechaAsisRes"])
 
-                        });
+                            });
+                        }
                     }
                 }
             }
