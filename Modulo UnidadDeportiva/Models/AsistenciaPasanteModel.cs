@@ -15,6 +15,9 @@ namespace Modulo_UnidadDeportiva.Models
         public Espacio Espacio { get; set; }
         public Deporte Deporte { get; set; }
         public int numEstudiantes { get; set; }
+        public int idResponsable { get; set; }
+
+        public int idProgramacion { get; set; }
 
         public List<SelectListItem>? ElementosDisp { get; set; }
 

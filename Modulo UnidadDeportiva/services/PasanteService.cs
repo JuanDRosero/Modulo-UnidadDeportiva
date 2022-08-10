@@ -26,12 +26,14 @@ namespace Modulo_UnidadDeportiva.services
                     con.Open();
                     command.Connection = con;
                     command.BindByName = true;
-                    command.CommandText = $"SELECT E.codespacio, E.nomespacio, D.nomdeporte, P.noinscrito, P.idhorainicio, " +
-                        $"P.idhorafin, D.iddeporte, D.nomdeporte from (select P.* from programacion P where idactividad = 'pr') P, estudiante Est, " +
-                        $"espacio E, deporte D, responsable R where P.consecprogra = R.consecres and " +
-                        $"R.codEstu = Est.codestu and P.iddia = (select case when to_char(sysdate+2,'day') like '%lun%' " +
-                        $"then 'l' when to_char(sysdate+2,'day') like '%mart%' then 'm' when to_char(sysdate+2,'day') like " +
-                        $"'%mi%' then 'w' when to_char(sysdate+2,'day') like '%jue%' then 'j' when to_char(sysdate+2,'day') " +
+                    command.CommandText = $"SELECT R.consecres, P.consecprogra, E.nomespacio, D.nomdeporte, " +
+                        $"E.codespacio, D.iddeporte, " +
+                        $"P.noinscrito, P.idhorainicio, P.idhorafin from (select P.* from programacion P where " +
+                        $"idactividad = 'pr') P, estudiante Est, espacio E, deporte D, responsable R where " +
+                        $"P.consecprogra = R.consecres and R.codEstu = Est.codestu and " +
+                        $"P.iddia = (select case when to_char(sysdate-1,'day') like '%lun%' then 'l' when " +
+                        $"to_char(sysdate-1,'day') like '%mart%' then 'm' when to_char(sysdate-1,'day') like '%mi%' " +
+                        $"then 'w' when to_char(sysdate-1,'day') like '%jue%' then 'j' when to_char(sysdate-1,'day') " +
                         $"like '%vie%' then 'v' end Dia from dual) and E.codespacio = P.codespacio and " +
                         $"D.iddeporte = P.iddeporte and Est.codestu = {codigo}";
                     command.CommandType = System.Data.CommandType.Text;
@@ -50,6 +52,9 @@ namespace Modulo_UnidadDeportiva.services
                             Nombre = reader["nomdeporte"].ToString()
                         };
                         amp.numEstudiantes = Convert.ToInt32(reader["noinscrito"].ToString());
+
+                        amp.idResponsable = Convert.ToInt32(reader["consecres"].ToString());
+                        amp.idProgramacion = Convert.ToInt32(reader["consecprogra"].ToString());
                     }
                     else
                     {
@@ -58,6 +63,20 @@ namespace Modulo_UnidadDeportiva.services
                 }
             }
 
+            using (OracleConnection con = new OracleConnection(_connectionString))
+            {
+                using (OracleCommand command = new OracleCommand())
+                {
+                    con.Open();
+                    command.Connection = con;
+                    command.BindByName = true;
+                    command.CommandText = $"insert into asistirresponsable (consecasisres, consecres, " +
+                            $"consecprogra, fechaasisres, horaasisres) values " +
+                            $"('" + amp.idResponsable + "','" + amp.idResponsable + "','" + amp.idProgramacion + "'," +
+                            "to_date(sysdate, 'yyyy-mm-dd'),to_date(sysdate, 'yyyy-mm-dd hh:mi'))";
+                    command.ExecuteNonQuery();
+                }
+            }
 
             string idSede = amp.Espacio.CodEspacio;
             string depid = amp.Deporte.IdDeporte;
@@ -70,7 +89,7 @@ namespace Modulo_UnidadDeportiva.services
                     Value = item.IDElementoD.ToString(),
                     Text = item.DescTipo
                 });
-                //ogger.LogError(item.IDElementoD.ToString());
+                //logger.LogError(item.IDElementoD.ToString());
             }
             return amp;
         }
